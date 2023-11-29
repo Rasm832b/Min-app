@@ -2,6 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:beginner_course/Functions/functioner.dart';
+import 'package:beginner_course/Functions/lister.dart';
 
 class AS1 extends StatefulWidget {
   const AS1({Key? key}) : super(key: key);
@@ -11,43 +13,8 @@ class AS1 extends StatefulWidget {
 }
 
 class _FirstPageState extends State<AS1> {
-  void undo(List x, List y) {
-    x.clear();
-    for (int i = 0; i < y.length; i++) {
-      y[i] = false;
-    }
-  }
-
-  bool toggleall = false;
-  List<bool> checked = List.generate(50, (index) => false);
-  List result = [];
-  List<String> names = [
-    "Anna ",
-    "Asger",
-    "Astrid",
-    "Camilla Frost",
-    "Caroline",
-    "Cecilie Frost",
-    "Christian",
-    "Christoffer",
-    "Emma",
-    "Fenja",
-    "Gustav",
-    "Helena Bach",
-    "Helena Elling",
-    "Inas",
-    "Karoline",
-    "Kristian",
-    "Lars",
-    "Louise",
-    "Luanna",
-    "Mathias",
-    "Mathilde",
-    "Morten",
-    "Sebastian",
-    " Sol",
-    "Thea"
-  ];
+  Lister ListAS1 = Lister();
+  Functioner FunctionAS1 = Functioner();
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +31,7 @@ class _FirstPageState extends State<AS1> {
                 onPressed: () {
                   setState(() {
                     Clipboard.setData(
-                        ClipboardData(text: 'Fremmøde: ${result}'));
+                        ClipboardData(text: 'Fremmøde: ${ListAS1.result}'));
                   });
                 },
                 icon: Icon(Icons.copy)),
@@ -72,7 +39,7 @@ class _FirstPageState extends State<AS1> {
                 onPressed: () {
                   setState(() {
                     Clipboard.setData(ClipboardData(text: ''));
-                    undo(result, checked);
+                    FunctionAS1.undo(ListAS1.result, ListAS1.checked);
                   });
                 },
                 icon: Icon(Icons.refresh)),
@@ -130,23 +97,23 @@ class _FirstPageState extends State<AS1> {
             child: SingleChildScrollView(
           child: Column(
             children: [
-              for (var i = 0; i < names.length; i += 1)
+              for (var i = 0; i < ListAS1.namesAS1.length; i += 1)
                 Row(
                   children: [
                     Checkbox(
                       onChanged: (bool? value) {
                         setState(() {
-                          checked[i] = value ?? false;
-                          if (checked[i] == true) {
-                            result.add(names[i]);
+                          ListAS1.checked[i] = value ?? false;
+                          if (ListAS1.checked[i] == true) {
+                            ListAS1.result.add(ListAS1.namesAS1[i]);
                           }
                         });
                       },
                       tristate: i == 1,
-                      value: checked[i],
+                      value: ListAS1.checked[i],
                     ),
                     Text(
-                      '${names[i]}',
+                      '${ListAS1.namesAS1[i]}',
                       style: TextStyle(fontSize: 20),
                     ),
                   ],
