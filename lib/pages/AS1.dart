@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:beginner_course/Functions/functioner.dart';
 import 'package:beginner_course/Functions/lister.dart';
+import 'package:hive/hive.dart';
 
 class AS1 extends StatefulWidget {
   const AS1({Key? key}) : super(key: key);
@@ -15,7 +16,7 @@ class AS1 extends StatefulWidget {
 class _FirstPageState extends State<AS1> {
   Lister ListAS1 = Lister();
   Functioner FunctionAS1 = Functioner();
-
+  final names = Hive.box('names');
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +32,7 @@ class _FirstPageState extends State<AS1> {
                 onPressed: () {
                   setState(() {
                     Clipboard.setData(
-                        ClipboardData(text: 'Fremmøde: ${ListAS1.result}'));
+                        ClipboardData(text: 'Fremmøde: ${FunctionAS1.result}'));
                   });
                 },
                 icon: Icon(Icons.copy)),
@@ -39,57 +40,27 @@ class _FirstPageState extends State<AS1> {
                 onPressed: () {
                   setState(() {
                     Clipboard.setData(ClipboardData(text: ''));
-                    FunctionAS1.undo(ListAS1.result, ListAS1.checked);
+                    FunctionAS1.undo(FunctionAS1.result, FunctionAS1.checked);
                   });
                 },
                 icon: Icon(Icons.refresh)),
-            // IconButton(
-            //     onPressed: () {
-            //       setState(() {
-            //         if (toggleall == false) {
-            //           for (int i = 0; i < checked.length; i++) {
-            //             checked[i] = true;
-            //           }
-            //           toggleall = !toggleall;
-            //         } else if (toggleall == true) {
-            //           for (int i = 0; i < checked.length; i++) {
-            //             checked[i] = false;
-            //           }
-            //           toggleall = !toggleall;
-            //         }
-            //       });
-            //     },
-            //     icon: Icon(Icons.favorite))
+            //IconButton(onPressed: () async {}, icon: Icon(Icons.add))
           ],
         ),
         drawer: Drawer(
-          backgroundColor: Colors.white,
           child: ListView(
             children: [
-              ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/AS2');
-                  },
-                  child: Text(
-                    'AS2',
-                    style: TextStyle(fontSize: 15),
-                  )),
-              ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/AS3');
-                  },
-                  child: Text(
-                    'AS3',
-                    style: TextStyle(fontSize: 15),
-                  )),
-              ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/AS4');
-                  },
-                  child: Text(
-                    'AS4',
-                    style: TextStyle(fontSize: 15),
-                  ))
+              SizedBox(
+                height: 10,
+              ),
+              IconButton(
+                onPressed: () {
+                  FunctionAS1.undo(FunctionAS1.result, FunctionAS1.checked);
+                  FunctionAS1.editorMode = FunctionAS1.editorMode;
+                  Navigator.pushNamed(context, '/settings');
+                },
+                icon: Icon(Icons.settings),
+              ),
             ],
           ),
         ),
@@ -97,23 +68,26 @@ class _FirstPageState extends State<AS1> {
             child: SingleChildScrollView(
           child: Column(
             children: [
-              for (var i = 0; i < ListAS1.namesAS1.length; i += 1)
+              for (var i = 0; i < names.length; i++)
                 Row(
                   children: [
                     Checkbox(
                       onChanged: (bool? value) {
                         setState(() {
-                          ListAS1.checked[i] = value ?? false;
-                          if (ListAS1.checked[i] == true) {
-                            ListAS1.result.add(ListAS1.namesAS1[i]);
+                          FunctionAS1.checked[i] = value ?? false;
+                          if (FunctionAS1.checked[i] == true) {
+                            FunctionAS1.result.add(FunctionAS1.names.getAt(i));
+                          }
+                          if (FunctionAS1.checked[i] == false) {
+                            FunctionAS1.result.remove(names.getAt(i));
                           }
                         });
                       },
                       tristate: i == 1,
-                      value: ListAS1.checked[i],
+                      value: FunctionAS1.checked[i],
                     ),
                     Text(
-                      '${ListAS1.namesAS1[i]}',
+                      '${names.getAt(i)}',
                       style: TextStyle(fontSize: 20),
                     ),
                   ],
