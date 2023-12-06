@@ -1,3 +1,4 @@
+import 'package:beginner_course/pages/settings.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:flutter/material.dart';
 
@@ -41,14 +42,12 @@ class Functioner {
     " Sol",
     "Thea"
   ];
-
-  showInputPopup(BuildContext context) {
+  Adding(BuildContext context) {
     TextEditingController firstController = TextEditingController();
 
     showDialog(
       context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
+      builder: (context) => StatefulBuilder(builder: (context,setState)=>AlertDialog(
           title: Text('Skriv navn'),
           content: SizedBox(
               height: 100,
@@ -72,16 +71,68 @@ class Functioner {
               onPressed: () {
                 // Use the values from the controllers
                 String firstValue = firstController.text;
-                names
-                    .add(firstValue[0].toUpperCase() + firstValue.substring(1));
+
+                names.add(firstValue[0].toUpperCase() + firstValue.substring(1));
                 // Close the dialog
+                Navigator.of(context).push(MaterialPageRoute(builder: (context)=> Stettings()));
+              },
+              child: Text('Tilføj'),
+            ),
+          ],
+        )
+        )); 
+      }
+
+
+  editting(BuildContext context,int i) {
+    TextEditingController firstController = TextEditingController();
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return StatefulBuilder(builder: (BuildContext context, StateSetter setState){
+           return AlertDialog(
+          title: Text('Skriv navn'),
+          content: SizedBox(
+              height: 100,
+              child: Column(
+                children: [
+                  TextField(
+                    controller: firstController,
+                    keyboardType: TextInputType.name,
+                    decoration: InputDecoration(labelText: 'Navn'),
+                  ),
+                ],
+              )),
+          actions: <Widget>[
+            ElevatedButton(onPressed: ()=> {names.deleteAt(i),
+            Navigator.of(context).pop()}, 
+            child: Text('Slet')),
+            ElevatedButton(
+              onPressed: () {
                 Navigator.of(context).pop();
+              },
+              child: Text('Annuller'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                // Use the values from the controllers
+                String firstValue = firstController.text;
+                setState(() {
+                names.putAt(i,firstValue[0].toUpperCase() + firstValue.substring(1));
+                  
+                });
+                // Close the dialog
+                Navigator.of(context).push(MaterialPageRoute(builder: (context)=> Stettings()));
               },
               child: Text('Tilføj'),
             ),
           ],
         );
+        });
+       
       },
     );
   }
 }
+

@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
       home: AS1(),
       routes: {
         '/AS1': (context) => AS1(),
-        '/settings': (context) => Stetings(),
+        '/settings': (context) => Stettings(),
       },
     );
   }
