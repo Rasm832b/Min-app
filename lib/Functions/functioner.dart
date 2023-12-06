@@ -125,7 +125,7 @@ class Functioner {
                 // Close the dialog
                 Navigator.of(context).push(MaterialPageRoute(builder: (context)=> Stettings()));
               },
-              child: Text('Tilføj'),
+              child: Text('Tilføj hej'),
             ),
           ],
         );
