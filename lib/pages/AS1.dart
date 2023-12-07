@@ -25,7 +25,7 @@ class _FirstPageState extends State<AS1> {
           centerTitle: true,
           title: Text(
             'Fremmøde AS1',
-            style: TextStyle(fontSize: 20, color: Colors.white),
+            style: TextStyle(fontSize: 20,),
           ),
           actions: [
             IconButton(
@@ -64,12 +64,11 @@ class _FirstPageState extends State<AS1> {
             ],
           ),
         ),
-        body: Center(
-            child: SingleChildScrollView(
+        body: SingleChildScrollView(
           child: Column(
             children: [
               for (var i = 0; i < names.length; i++)
-                Row(
+                Card(child:Row(
                   children: [
                     Checkbox(
                       onChanged: (bool? value) {
@@ -92,9 +91,9 @@ class _FirstPageState extends State<AS1> {
                     ),
                   ],
                   mainAxisAlignment: MainAxisAlignment.start,
-                ),
+                ),)
             ],
           ),
-        )));
+        ));
   }
 }

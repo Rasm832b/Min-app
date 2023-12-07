@@ -106,7 +106,9 @@ class Functioner {
               )),
           actions: <Widget>[
             ElevatedButton(onPressed: ()=> {names.deleteAt(i),
-            Navigator.of(context).pop()}, 
+            Navigator.of(context).push(MaterialPageRoute(builder: (context)=> Stettings()))
+            }
+            , 
             child: Text('Slet')),
             ElevatedButton(
               onPressed: () {
@@ -123,9 +125,11 @@ class Functioner {
                   
                 });
                 // Close the dialog
+                
                 Navigator.of(context).push(MaterialPageRoute(builder: (context)=> Stettings()));
+
               },
-              child: Text('Tilføj'),
+              child: Text('OK'),
             ),
           ],
         );
