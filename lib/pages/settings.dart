@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:beginner_course/Functions/functioner.dart';
 import 'package:beginner_course/Functions/lister.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Stettings extends StatelessWidget {
   Stettings({super.key});
@@ -26,6 +27,8 @@ class Changes extends StatefulWidget {
 class _ChangesState extends State<Changes> {
   Functioner FunctionAS1 = Functioner();
   var names = Hive.box('names');
+  
+  var facebook_messenger_link = 'https://m.me/${'rasmus.bertelsen'}?text=${'Message_to_be_sent'}';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,6 +38,7 @@ class _ChangesState extends State<Changes> {
           title: Text('Settings'),
           centerTitle: true,
           actions: [
+            
             // IconButton(
             //     onPressed: () async {
             //       setState(() {

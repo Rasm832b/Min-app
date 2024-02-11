@@ -17,7 +17,7 @@ class Functioner {
   List edits = [];
   List<String> namesAS1 = [
     "Anna ",
-    "Asger",
+    "Asgar",
     "Astrid",
     "Camilla Frost",
     "Caroline",
@@ -40,7 +40,12 @@ class Functioner {
     "Morten",
     "Sebastian",
     " Sol",
-    "Thea"
+    "Thea",
+    "Sebastian",
+    "Emil",
+    "Morten",
+    "Victoria",
+    "Kristiane",
   ];
   Adding(BuildContext context) {
     TextEditingController firstController = TextEditingController();
@@ -74,7 +79,7 @@ class Functioner {
 
                 names.add(firstValue[0].toUpperCase() + firstValue.substring(1));
                 // Close the dialog
-                Navigator.of(context).push(MaterialPageRoute(builder: (context)=> Stettings()));
+                Navigator.popAndPushNamed(context, '/settings');
               },
               child: Text('Tilføj'),
             ),

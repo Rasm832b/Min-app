@@ -17,6 +17,7 @@ class _FirstPageState extends State<AS1> {
   Lister ListAS1 = Lister();
   Functioner FunctionAS1 = Functioner();
   final names = Hive.box('names');
+  int antalValgte =0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,6 +29,7 @@ class _FirstPageState extends State<AS1> {
             style: TextStyle(fontSize: 20,),
           ),
           actions: [
+            Text('${antalValgte}',style: TextStyle(fontSize: 20),),
             IconButton(
                 onPressed: () {
                   setState(() {
@@ -76,10 +78,13 @@ class _FirstPageState extends State<AS1> {
                           FunctionAS1.checked[i] = value ?? false;
                           if (FunctionAS1.checked[i] == true) {
                             FunctionAS1.result.add(FunctionAS1.names.getAt(i));
+                            antalValgte++;
                           }
                           if (FunctionAS1.checked[i] == false) {
                             FunctionAS1.result.remove(names.getAt(i));
+                            antalValgte--;
                           }
+                          
                         });
                       },
                       tristate: i == 1,
