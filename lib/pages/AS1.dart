@@ -43,6 +43,7 @@ class _FirstPageState extends State<AS1> {
                   setState(() {
                     Clipboard.setData(ClipboardData(text: ''));
                     FunctionAS1.undo(FunctionAS1.result, FunctionAS1.checked);
+                    antalValgte=0;
                   });
                 },
                 icon: Icon(Icons.refresh)),

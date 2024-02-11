@@ -28,7 +28,7 @@ class _ChangesState extends State<Changes> {
   Functioner FunctionAS1 = Functioner();
   var names = Hive.box('names');
   
-  var facebook_messenger_link = 'https://m.me/${'rasmus.bertelsen'}?text=${'Message_to_be_sent'}';
+ bool click = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,27 +53,6 @@ class _ChangesState extends State<Changes> {
             //       print(names.toMap());
             //     },
             //     icon: const Icon(Icons.beach_access)),
-            // FloatingActionButton(
-            //   onPressed: () async {
-            //     await names.clear();
-            //     setState(() {
-            //       for (var x = 0; x < names.length; x++) {
-            //         names.add(FunctionAS1.namesAS1[x]);
-            //       }
-            //       FunctionAS1.undo(FunctionAS1.edits, FunctionAS1.checked);
-            //     });
-            //   },
-            //   backgroundColor: Colors.red[200],
-            //   child: Icon(Icons.repeat),
-            // ),
-            IconButton(
-                onPressed: ()async {
-                  await FunctionAS1.Adding(context);
-                  setState(() {
-                    
-                  });
-                },
-                icon: Icon(Icons.add))
           ],
         ),
         drawer: Drawer(

@@ -39,7 +39,7 @@ class Functioner {
     "Mathilde",
     "Morten",
     "Sebastian",
-    " Sol",
+    "Sol",
     "Thea",
     "Sebastian",
     "Emil",
